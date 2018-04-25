@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="随笔," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/bitbug_favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="配置HTTPS服务器要配置HTTPS服务器，ssl必须在 服务器 块中的 侦听套接字 上启用该参数 ，并且 应指定服务器证书 和 私钥 文件的位置 ： server {     listen              443 ssl;     server_name         www.example.com;     ssl_certificate     www.example.com.c">
+<meta name="keywords" content="随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置HTTPS服务器">
+<meta property="og:url" content="https://yangmj.xin/2017/10/25/hello/index.html">
+<meta property="og:site_name" content="Dream Afar">
+<meta property="og:description" content="配置HTTPS服务器要配置HTTPS服务器，ssl必须在 服务器 块中的 侦听套接字 上启用该参数 ，并且 应指定服务器证书 和 私钥 文件的位置 ： server {     listen              443 ssl;     server_name         www.example.com;     ssl_certificate     www.example.com.c">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-24T14:46:05.620Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="配置HTTPS服务器">
+<meta name="twitter:description" content="配置HTTPS服务器要配置HTTPS服务器，ssl必须在 服务器 块中的 侦听套接字 上启用该参数 ，并且 应指定服务器证书 和 私钥 文件的位置 ： server {     listen              443 ssl;     server_name         www.example.com;     ssl_certificate     www.example.com.c">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'B7FX6EIYH6',
+      apiKey: 'b6638de9a09032ef730301980c0ff6c8',
+      indexName: 'eric_hexo_next_index',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yangmj.xin/2017/10/25/hello/"/>
+
+
+
+
+
+  <title>配置HTTPS服务器 | Dream Afar</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6dc2193e8ff781886ded0c5a93b1b148";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dream Afar</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A new way to explore the world</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yangmj.xin/2017/10/25/hello/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eric Yang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dream Afar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">配置HTTPS服务器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T10:48:17+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTTPS/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTPS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/25/hello/" class="leancloud_visitors" data-flag-title="配置HTTPS服务器">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="配置HTTPS服务器"><a href="#配置HTTPS服务器" class="headerlink" title="配置HTTPS服务器"></a>配置HTTPS服务器</h2><p>要配置HTTPS服务器，ssl必须在 <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server" target="_blank" rel="external">服务器</a> 块中的 <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#listen" target="_blank" rel="external">侦听套接字</a> 上启用该参数 ，并且 <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate" target="_blank" rel="external">应指定服务器证书</a> 和 <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate_key" target="_blank" rel="external">私钥</a> 文件的位置 ：</p>
+<pre><code>server {
+    listen              443 ssl;
+    server_name         www.example.com;
+    ssl_certificate     www.example.com.crt;
+    ssl_certificate_key www.example.com.key;
+    ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers         HIGH:!aNULL:!MD5;
+    ...
+}
+</code></pre><a id="more"></a>
+<p>服务器证书是一个公共实体。它被发送到连接到服务器的每个客户端。私钥是一个安全实体，应该存储在一个受限访问的文件中，但是它必须是nginx的主进程可读的。私钥可以替代地存储在与证书相同的文件中：  </p>
+<pre><code>ssl_certificate     www.example.com.cert;
+ssl_certificate_key www.example.com.cert;
+</code></pre><p>在这种情况下，文件访问权限也应该被限制。虽然证书和密钥存储在一个文件中，但只有证书被发送到客户端。<br>指令 <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_protocols" target="_blank" rel="external">ssl_protocols</a> 和 <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_ciphers" target="_blank" rel="external">ssl_ciphers </a> 可用于限制连接以仅包含SSL / TLS的强大版本和密码。默认情况下，nginx使用“ ssl_protocols TLSv1 TLSv1.1 TLSv1.2”和“ ssl_ciphers HIGH:!aNULL:!MD5”，因此通常不需要明确配置它们。请注意，这些指令的默认值已 更改多次。  </p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">adfadsfasdfadf</span></div></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">	    listen              <span class="number">443</span> ssl<span class="comment">;</span></div><div class="line">	    server_name         www.example.com<span class="comment">;</span></div><div class="line">	    ssl_certificate     www.example.com.crt<span class="comment">;</span></div><div class="line">	    ssl_certificate_key www.example.com.key<span class="comment">;</span></div><div class="line">	    ssl_protocols       TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span><span class="comment">;</span></div><div class="line">	    ssl_ciphers         HIGH:!aNULL:!MD5<span class="comment">;</span></div><div class="line">	    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="HTTPS服务器优化"><a href="#HTTPS服务器优化" class="headerlink" title="HTTPS服务器优化"></a>HTTPS服务器优化</h3><p>SSL操作会占用更多的CPU资源。在多处理器系统上， 应该运行几个 <a href="http://nginx.org/en/docs/ngx_core_module.html#worker_processes" target="_blank" rel="external">工作进程</a>，不少于可用CPU内核的数量。最多的CPU密集型操作是SSL握手。有两种方法可以最大程度地减少每个客户端的这些操作数量：首先是通过使 <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_timeout" target="_blank" rel="external">Keepalive</a> 连接通过一个连接发送多个请求，第二个是重用SSL会话参数，以避免并行和后续连接的SSL握手。会话存储在工作人员共享的SSL会话高速缓存中，并由<a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_session_cache" target="_blank" rel="external">ssl_session_cache</a> 指令配置 。一兆字节的缓存包含约4000个会话。默认缓存超时时间为5分钟。它可以通过使用增加 <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_session_timeout" target="_blank" rel="external">ssl_session_timeout</a> 指令。以下是针对具有10兆字节共享会话缓存的多核系统优化的示例配置：   </p>
+<pre><code>worker_processes auto;
+
+http {
+    ssl_session_cache   shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    server {
+        listen              443 ssl;
+        server_name         www.example.com;
+        keepalive_timeout   70;
+
+        ssl_certificate     www.example.com.crt;
+        ssl_certificate_key www.example.com.key;
+        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+        ...
+</code></pre><h3 id="SSL证书链"><a href="#SSL证书链" class="headerlink" title="SSL证书链"></a>SSL证书链</h3><p>有些浏览器可能会抱怨知名证书颁发机构签发的证书，而其他浏览器可能会接受证书而没有问题。发生这种情况是因为颁发机构已使用特定浏览器分发的知名可信证书颁发机构的证书库中不存在的中间证书来签署服务器证书。在这种情况下，权限提供了一系列链接的证书，这些证书应该连接到签名的服务器证书。服务器证书必须出现在组合文件中的链接证书之前：  </p>
+<pre><code>$ cat www.example.com.crt bundle.crt &gt; www.example.com.chained.crt
+</code></pre><p>生成的文件应该在 <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate" target="_blank" rel="external">ssl_certificate</a> 指令中使用：  </p>
+<pre><code>server {
+    listen              443 ssl;
+    server_name         www.example.com;
+    ssl_certificate     www.example.com.chained.crt;
+    ssl_certificate_key www.example.com.key;
+    ...
+}
+</code></pre><p>如果服务器证书和捆绑包以错误的顺序连接，nginx将无法启动并显示错误消息：  </p>
+<pre><code>SSL_CTX_use_PrivateKey_file(&quot; ... /www.example.com.key&quot;) failed
+   (SSL: error:0B080074:x509 certificate routines:
+    X509_check_private_key:key values mismatch)
+</code></pre><p>因为nginx已尝试使用私钥使用捆绑包的第一个证书而不是服务器证书。  </p>
+<p>浏览器通常存储他们收到的中间证书，哪些由受信任的机构签名，所以主动使用的浏览器可能已经具有所需的中间证书，并且可能不会抱怨没有链接捆绑包发送的证书。为了确保服务器发送完整的证书链，openssl可以使用命令行实用程序，例如：  </p>
+<pre><code>$ openssl s_client -connect www.godaddy.com:443
+...
+Certificate chain
+ 0 s:/C=US/ST=Arizona/L=Scottsdale/1.3.6.1.4.1.311.60.2.1.3=US
+     /1.3.6.1.4.1.311.60.2.1.2=AZ/O=GoDaddy.com, Inc
+     /OU=MIS Department/CN=www.GoDaddy.com
+     /serialNumber=0796928-7/2.5.4.15=V1.0, Clause 5.(b)
+   i:/C=US/ST=Arizona/L=Scottsdale/O=GoDaddy.com, Inc.
+     /OU=http://certificates.godaddy.com/repository
+     /CN=Go Daddy Secure Certification Authority
+     /serialNumber=07969287
+ 1 s:/C=US/ST=Arizona/L=Scottsdale/O=GoDaddy.com, Inc.
+     /OU=http://certificates.godaddy.com/repository
+     /CN=Go Daddy Secure Certification Authority
+     /serialNumber=07969287
+   i:/C=US/O=The Go Daddy Group, Inc.
+     /OU=Go Daddy Class 2 Certification Authority
+ 2 s:/C=US/O=The Go Daddy Group, Inc.
+     /OU=Go Daddy Class 2 Certification Authority
+   i:/L=ValiCert Validation Network/O=ValiCert, Inc.
+     /OU=ValiCert Class 2 Policy Validation Authority
+     /CN=http://www.valicert.com//emailAddress=info@valicert.com
+...
+</code></pre><p>在该示例中，服务器证书＃0 的主体（“ s ”） www.GoDaddy.com由发行人（“ i ”）签名，发行人本身是证书＃1的主体，由发行人本身是​​主体证书＃2，由知名发行人ValiCert，Inc.签署， 其证书存储在浏览器的内置证书库（位于Jack建造的房屋中）。  </p>
+<p>如果未添加证书包，则仅显示服务器证书＃0。  </p>
+<h3 id="单个HTTP-HTTPS服务器"><a href="#单个HTTP-HTTPS服务器" class="headerlink" title="单个HTTP / HTTPS服务器"></a>单个HTTP / HTTPS服务器</h3><p>可以配置一个处理HTTP和HTTPS请求的单个服务器：  </p>
+<pre><code>server {
+    listen              80;
+    listen              443 ssl;
+    server_name         www.example.com;
+    ssl_certificate     www.example.com.crt;
+    ssl_certificate_key www.example.com.key;
+    ...
+}
+</code></pre><p>在0.7.14之前，无法为各个监听套接字选择性地启用SSL，如上所示。只能使用 <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl" target="_blank" rel="external">ssl</a> 指令为整个服务器启用 <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl" target="_blank" rel="external">SSL</a>，从而无法设置单个HTTP / HTTPS服务器。添加ssl了 <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#listen" target="_blank" rel="external">listen</a> 指令的参数 来解决这个问题。因此，在现代版本中使用 <a href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl" target="_blank" rel="external">ssl</a> 指令是不鼓励的。  </p>
+<h3 id="基于名称的HTTPS服务器"><a href="#基于名称的HTTPS服务器" class="headerlink" title="基于名称的HTTPS服务器"></a>基于名称的HTTPS服务器</h3><p>配置两个或多个HTTPS服务器侦听单个IP地址时，会出现常见问题：  </p>
+<pre><code>server {
+    listen          443 ssl;
+    server_name     www.example.com;
+    ssl_certificate www.example.com.crt;
+    ...
+}
+
+server {
+    listen          443 ssl;
+    server_name     www.example.org;
+    ssl_certificate www.example.org.crt;
+    ...
+}
+</code></pre><p>使用此配置，浏览器接收默认服务器的证书，即www.example.com不管所请求的服务器名称如何。这是由SSL协议行为引起的。在浏览器发送HTTP请求之前建立SSL连接，并且nginx不知道请求的服务器的名称。因此，它只能提供默认服务器的证书。  </p>
+<p>解决问题的最古老和最强大的方法是为每个HTTPS服务器分配一个单独的IP地址：  </p>
+<pre><code>server {
+    listen          192.168.1.1:443 ssl;
+    server_name     www.example.com;
+    ssl_certificate www.example.com.crt;
+    ...
+}
+
+server {
+    listen          192.168.1.2:443 ssl;
+    server_name     www.example.org;
+    ssl_certificate www.example.org.crt;
+    ...
+}
+</code></pre><h3 id="具有多个名称的SSL证书"><a href="#具有多个名称的SSL证书" class="headerlink" title="具有多个名称的SSL证书"></a>具有多个名称的SSL证书</h3><p>还有其他方法允许在多个HTTPS服务器之间共享一个IP地址。然而，他们都有自己的缺点。一种方法是在SubjectAltName证书字段中使用具有多个名称的证书，例如 www.example.com和www.example.org。但是，SubjectAltName字段长度有限。  </p>
+<p>另一种方法是使用通配符名称的证书，例如 <em>.example.org。通配符证书保护指定域的所有子域，但只能在一个级别上。该证书相匹配www.example.org，但不匹配 example.org和www.sub.example.org。这两种方法也可以组合使用。证书可以在SubjectAltName字段中包含精确和通配符名称，例如 example.org和</em>.example.org。  </p>
+<p>最好将几个名称的证书文件和其配置的http级别的私钥文件放在所有服务器中继承其单个内存副本：  </p>
+<pre><code>ssl_certificate     common.crt;
+ssl_certificate_key common.key;
+
+server {
+    listen          443 ssl;
+    server_name     www.example.com;
+    ...
+}
+
+server {
+    listen          443 ssl;
+    server_name     www.example.org;
+    ...
+}
+</code></pre><h3 id="服务器名称指示"><a href="#服务器名称指示" class="headerlink" title="服务器名称指示"></a>服务器名称指示</h3><p>在单个IP地址上运行多个HTTPS服务器的更通用的解决方案是 <a href="http://en.wikipedia.org/wiki/Server_Name_Indication" target="_blank" rel="external">TLS服务器名称指示扩展</a>（SNI，RFC 6066），允许浏览器在SSL握手期间传递所请求的服务器名称，因此服务器将知道哪个它应该用于连接的证书。 大多数现代浏览器目前都 <a href="http://en.wikipedia.org/wiki/Server_Name_Indication#Support" target="_blank" rel="external">支持</a> SNI ，尽管可能不会被某些旧的或特殊的客户端使用。  </p>
+<pre><code>只有域名可以在SNI中传递，但是如果请求包含文字IP地址，某些浏览器可能会错误地将服务器的IP地址作为其名称传递。不应该依赖这个。
+</code></pre><p>为了在nginx中使用SNI，必须在已经构建了nginx二进制文件的OpenSSL库以及在运行时被动态链接的库中支持它。如果使用配置选项“–enable-tlsext”构建，则OpenSSL支持SNI，因为0.9.8f版本 。 由于OpenSSL 0.9.8j此选项默认启用。如果nginx是用SNI支持构建的，那么当使用“-V”开关运行时，nginx会显示这个：  </p>
+<pre><code>$ nginx -V
+...
+TLS SNI support enabled
+...    
+</code></pre><p>然而，如果SNI启用的nginx与没有SNI支持的OpenSSL库动态链接，则nginx会显示警告：  </p>
+<pre><code>nginx was built with SNI support, however, now it is linked
+dynamically to an OpenSSL library which has no tlsext support,
+therefore SNI is not available
+</code></pre><h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><ul>
+<li>SNI支持状态由“-V”开关显示为0.8.21和0.7.62。</li>
+<li>从0.7.14开始，支持 <a href="http://nginx.org/en/docs/http/ngx_http_core_module.html#listen" target="_blank" rel="external">listen</a> 指令 的ssl参数 。在0.8.21之前，只能与参数一起指定 。 default</li>
+<li>自0.5.23以来，SNI得到了支持。</li>
+<li>从0.5.6起，共享的SSL会话缓存已被支持。</li>
+<li>版本1.9.1及更高版本：默认SSL协议为TLSv1，TLSv1.1和TLSv1.2（如果OpenSSL库支持）。</li>
+<li>版本0.7.65，0.8.19及更高版本：默认SSL协议是SSLv3，TLSv1，TLSv1.1和TLSv1.2（如果OpenSSL库支持）。</li>
+<li>版本0.7.64，0.8.18及更早版本：默认SSL协议为SSLv2，SSLv3和TLSv1。</li>
+<li>版本1.0.5及更高版本：默认SSL密码为“ HIGH:!aNULL:!MD5”。</li>
+<li>版本0.7.65，0.8.20及更高版本：默认SSL密码为“ HIGH:!ADH:!MD5”。</li>
+<li>版本0.8.19：默认SSL密码为“ ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM”。</li>
+<li>版本0.7.64，0.8.18及更早版本：默认SSL密码为<br>“ ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP”。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/WechatIMG26.jpeg" alt="Eric Yang WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/WechatIMG27.jpeg" alt="Eric Yang Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Eric Yang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yangmj.xin/2017/10/25/hello/" title="配置HTTPS服务器">https://yangmj.xin/2017/10/25/hello/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/随笔/" rel="tag"># 随笔</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/25/WebSocket/" rel="prev" title="WebSocket代理">
+                WebSocket代理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59f0482db166bc1a" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjAwMS8xMjUzNw=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/1.jpg"
+               alt="Eric Yang" />
+          <p class="site-author-name" itemprop="name">Eric Yang</p>
+           
+              <p class="site-description motion-element" itemprop="description">You got a dream, you gotta protect it</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.baidu.com" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.jd.com" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="your-weibo-url" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="your-douban-url" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      E-Mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.jd.com" title="LBJ" target="_blank">LBJ</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.baidu.com" title="Tom" target="_blank">Tom</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置HTTPS服务器"><span class="nav-number">1.</span> <span class="nav-text">配置HTTPS服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS服务器优化"><span class="nav-number">1.1.</span> <span class="nav-text">HTTPS服务器优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL证书链"><span class="nav-number">1.2.</span> <span class="nav-text">SSL证书链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单个HTTP-HTTPS服务器"><span class="nav-number">1.3.</span> <span class="nav-text">单个HTTP / HTTPS服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于名称的HTTPS服务器"><span class="nav-number">1.4.</span> <span class="nav-text">基于名称的HTTPS服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具有多个名称的SSL证书"><span class="nav-number">1.5.</span> <span class="nav-text">具有多个名称的SSL证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器名称指示"><span class="nav-number">1.6.</span> <span class="nav-text">服务器名称指示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容性"><span class="nav-number">1.7.</span> <span class="nav-text">兼容性</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eric Yang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="true"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("aoLjb4wVQlRy9vrfD4tzttfp-gzGzoHsz", "4KmejdxayrrU9zcq9qfLidPI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
