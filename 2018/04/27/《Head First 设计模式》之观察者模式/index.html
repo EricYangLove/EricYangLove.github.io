@@ -122,14 +122,14 @@
 <meta property="og:site_name" content="Dream Afar">
 <meta property="og:description" content="《Head First 设计模式》之观察者模式前言　　昨天lz写了一篇关于策略模式的文章，感觉这篇文章写了很久才完成，而且自我感觉写的并不是很好。究其原因lz发现有以下几点。第一，lz对设计模式刚开始接触，现在也仅仅只是停留在概念阶段，没有付诸实践，没有将这些设计理论运用到项目中去，可能现在对lz来讲很难讲其吃透，不过这也能理解，对新知识的学习毕竟是要循序渐进。第二，lz觉得自己的写作能力有所欠缺">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://yangmj.xin/uploads/photos/观察者模式官方UML">
-<meta property="og:image" content="https://yangmj.xin/uploads/photos/观察者模式UML-示例">
+<meta property="og:image" content="https://yangmj.xin/uploads/photos/观察者模式官方UML.png">
+<meta property="og:image" content="https://yangmj.xin/uploads/photos/观察者模式UML-示例.png">
 <meta property="og:image" content="https://yangmj.xin/uploads/photos/0D11E3DC-62A6-4D99-A5AF-BE8E4C72B6FF.png">
-<meta property="og:updated_time" content="2018-04-27T14:24:59.476Z">
+<meta property="og:updated_time" content="2018-04-27T14:25:52.995Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Head First 设计模式》之观察者模式">
 <meta name="twitter:description" content="《Head First 设计模式》之观察者模式前言　　昨天lz写了一篇关于策略模式的文章，感觉这篇文章写了很久才完成，而且自我感觉写的并不是很好。究其原因lz发现有以下几点。第一，lz对设计模式刚开始接触，现在也仅仅只是停留在概念阶段，没有付诸实践，没有将这些设计理论运用到项目中去，可能现在对lz来讲很难讲其吃透，不过这也能理解，对新知识的学习毕竟是要循序渐进。第二，lz觉得自己的写作能力有所欠缺">
-<meta name="twitter:image" content="https://yangmj.xin/uploads/photos/观察者模式官方UML">
+<meta name="twitter:image" content="https://yangmj.xin/uploads/photos/观察者模式官方UML.png">
 
 
 
@@ -468,9 +468,9 @@
 <p>我想大家从上面的这份关系中可以初步了解观察者模式，其实出版者+订阅者=观察者模式。不过我们习惯将出版者称为“主题”（Subject）,订阅者称为“观察者”（Observer）。现用浅显的话语解释下，首先主题对象管理着某些数据，观察者已经订阅（注册）主题以便在主题数据改变时能够收到更新。其次当主题内的数据改变时，就会通知观察者，也即：新的数据会以某种形式送到观察者手上。当然，如果某个对象不是观察者，即使主题数据更新时也不会将新的数据通知到此对象。</p>
 <h3 id="定义观察者模式"><a href="#定义观察者模式" class="headerlink" title="　　定义观察者模式"></a>　　定义观察者模式</h3><p>　　现给出观察者模式官方解释：定义了对象之间的一对多依赖，这样一来，当一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。可以理解为，主题和观察者定义了一对多关系。观察者依赖于此主题，只要主题状态一有变化，观察者就会被通知。根据通知的风格，观察者可能因此新值而更新。其实实现观察者模式的方法不止一种，但是以包含Subject和Observer接口的类设计的做法最为常见，下面给出该模式类图。</p>
 <p>UML类图</p>
-<p><img src="https://yangmj.xin/uploads/photos/观察者模式官方UML" alt=""></p>
+<p><img src="https://yangmj.xin/uploads/photos/观察者模式官方UML.png" alt=""></p>
 <h3 id="气象站实例"><a href="#气象站实例" class="headerlink" title="　　气象站实例"></a>　　气象站实例</h3><p>　　现给出具体需求：某公司需要建立下一代气象站，且必须建立在给出的WeatherData对象上，由该对象负责追踪目前的天气状况（温度，湿度，气压）。希望能建立一个应用，有三种布告板，分别显示目前的状况，气象统计及简单的预报。当WeatherData对象获得最新的测量数据时，三种布告板必须要实时更新。最后这是一个可扩展的气象站，也即：希望能实现自己的布告板并插入到此应用中。</p>
-<p>　　现给出该应用UML图：<br><img src="https://yangmj.xin/uploads/photos/观察者模式UML-示例" alt=""></p>
+<p>　　现给出该应用UML图：<br><img src="https://yangmj.xin/uploads/photos/观察者模式UML-示例.png" alt=""></p>
 <p>下面我们再来具体实现该气象站，首先从接口开始，</p>
 <p>主题接口：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> xin.yangmj.observer.subject;</div><div class="line"></div><div class="line"><span class="keyword">import</span> xin.yangmj.observer.observe.Observer;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 这是主题接口，所有具体主题都应实现此接口</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@author</span> Eric Yang</span></div><div class="line"><span class="comment"> * <span class="doctag">@create</span> 2017-10-07 下午3:56</span></div><div class="line"><span class="comment"> **/</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Subject</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer o)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer o)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObserver</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
