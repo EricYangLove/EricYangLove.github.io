@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="设计模式," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Dream Afar" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/uploads/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="前言　　昨晚lz在博客园里写了第一篇文章，虽然不是关于技术方面的，但终究算是正式开启了自己写作的生涯。曾经lz加入了一个微信群，是关于英语学习的。这个群里每天早上都会推送一条今日分享，其实就是一句中文和一句英文。当然这推送内容应该说是精挑细选的，会给人传递一些比较正能量的东西。lz觉得这种行为还是比较有意义的，所以，lz会在日后每条文章前面放上这些分享，希望能和广大友人共勉。 　　最近，lz在学习">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Head First 设计模式》之策略模式">
+<meta property="og:url" content="https://yangmj.xin/2018/03/27/design-patterns-strategy/index.html">
+<meta property="og:site_name" content="Dream Afar">
+<meta property="og:description" content="前言　　昨晚lz在博客园里写了第一篇文章，虽然不是关于技术方面的，但终究算是正式开启了自己写作的生涯。曾经lz加入了一个微信群，是关于英语学习的。这个群里每天早上都会推送一条今日分享，其实就是一句中文和一句英文。当然这推送内容应该说是精挑细选的，会给人传递一些比较正能量的东西。lz觉得这种行为还是比较有意义的，所以，lz会在日后每条文章前面放上这些分享，希望能和广大友人共勉。 　　最近，lz在学习">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images2017.cnblogs.com/blog/1098077/201710/1098077-20171006152649458-1148635449.png">
+<meta property="og:image" content="http://images2017.cnblogs.com/blog/1098077/201710/1098077-20171006155602443-1141011125.png">
+<meta property="og:updated_time" content="2019-08-31T02:20:53.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Head First 设计模式》之策略模式">
+<meta name="twitter:description" content="前言　　昨晚lz在博客园里写了第一篇文章，虽然不是关于技术方面的，但终究算是正式开启了自己写作的生涯。曾经lz加入了一个微信群，是关于英语学习的。这个群里每天早上都会推送一条今日分享，其实就是一句中文和一句英文。当然这推送内容应该说是精挑细选的，会给人传递一些比较正能量的东西。lz觉得这种行为还是比较有意义的，所以，lz会在日后每条文章前面放上这些分享，希望能和广大友人共勉。 　　最近，lz在学习">
+<meta name="twitter:image" content="http://images2017.cnblogs.com/blog/1098077/201710/1098077-20171006152649458-1148635449.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: 'S31V1C9WXZ',
+      apiKey: 'c96619637623789e9d0e31bdbd30a85b',
+      indexName: 'eric_hexo_index',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yangmj.xin/2018/03/27/design-patterns-strategy/"/>
+
+
+
+
+
+  <title>《Head First 设计模式》之策略模式 | Dream Afar</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6dc2193e8ff781886ded0c5a93b1b148";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dream Afar</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A new way to explore the world</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yangmj.xin/2018/03/27/design-patterns-strategy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eric Yang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/home.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dream Afar">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《Head First 设计模式》之策略模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T20:40:15+08:00">
+                2018-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/27/design-patterns-strategy/" class="leancloud_visitors" data-flag-title="《Head First 设计模式》之策略模式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h3><p>　　昨晚lz在博客园里写了第一篇文章，虽然不是关于技术方面的，但终究算是正式开启了自己写作的生涯。曾经lz加入了一个微信群，是关于英语学习的。这个群里每天早上都会推送一条今日分享，其实就是一句中文和一句英文。当然这推送内容应该说是精挑细选的，会给人传递一些比较正能量的东西。lz觉得这种行为还是比较有意义的，所以，lz会在日后每条文章前面放上这些分享，希望能和广大友人共勉。</p>
+<p>　　最近，lz在学习设计模式，书籍为友人推荐的《Head First 设计模式》，心里有些体会，故将它写下来望能和大家共同交流和学习，写的不好还请大家多多见谅。今天给大家带来的是lz学完策略模式之后的感悟！</p>
+<h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3><p>　　lz想摘录书中比较经典的话，使用模式最好的方式是：“把模式装进脑子里，然后在你的设计和已有的应用中，寻找何处可以使用它们。”以往是代码复用，现在是经验复用。</p>
+<p>　　先给出模拟鸭子这个应用的最终版本，其UML类图如下：</p>
+<p><img src="http://images2017.cnblogs.com/blog/1098077/201710/1098077-20171006152649458-1148635449.png" alt="img"></p>
+<p> 上面这几个类，接口之间的关系还是很简单，相信大家都能看得懂哈!</p>
+<p>　　 再给出具体的类，接口的示例代码如下</p>
+<p>　　 封装飞行行为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> <span class="number">1</span> <span class="keyword">package</span> xin.yangmj.strategy.behavior.fly;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 4  * 这是飞行行为接口</span></div><div class="line"><span class="comment"> 5  *</span></div><div class="line"><span class="comment"> 6  * <span class="doctag">@author</span> Eric Yang</span></div><div class="line"><span class="comment"> 7  * <span class="doctag">@create</span> 2017-10-06 下午1:31</span></div><div class="line"><span class="comment"> 8  **/</span></div><div class="line"> <span class="number">9</span> <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FlyBehavior</span> </span>&#123;</div><div class="line"><span class="number">10</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span></span>;</div><div class="line"><span class="number">11</span> &#125;</div></pre></td></tr></table></figure>
+<p>　　 具体的飞行行为实现类：</p>
+<p>代表会飞的鸭子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"> <span class="number">1</span> <span class="keyword">package</span> xin.yangmj.strategy.behavior.fly.impl;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> <span class="keyword">import</span> xin.yangmj.strategy.behavior.fly.FlyBehavior;</div><div class="line"> <span class="number">4</span> </div><div class="line"> <span class="number">5</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 6  * 这是飞行行为得实现，给“真会”飞的鸭子用...</span></div><div class="line"><span class="comment"> 7  *</span></div><div class="line"><span class="comment"> 8  * <span class="doctag">@author</span> Eric Yang</span></div><div class="line"><span class="comment"> 9  * <span class="doctag">@create</span> 2017-10-06 下午1:33</span></div><div class="line"><span class="comment">10  **/</span></div><div class="line"><span class="number">11</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyWithWings</span> <span class="keyword">implements</span> <span class="title">FlyBehavior</span> </span>&#123;</div><div class="line"><span class="number">12</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="number">13</span>         System.out.println(<span class="string">"I'm flying!!!"</span>);</div><div class="line"><span class="number">14</span>     &#125;</div><div class="line"><span class="number">15</span> &#125;</div></pre></td></tr></table></figure>
+<p>代表不会飞的鸭子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"> <span class="number">1</span> <span class="keyword">package</span> xin.yangmj.strategy.behavior.fly.impl;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> <span class="keyword">import</span> xin.yangmj.strategy.behavior.fly.FlyBehavior;</div><div class="line"> <span class="number">4</span> </div><div class="line"> <span class="number">5</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 6  * 这是飞行行为的实现，给“不会”飞的鸭子用...</span></div><div class="line"><span class="comment"> 7  *</span></div><div class="line"><span class="comment"> 8  * <span class="doctag">@author</span> Eric Yang</span></div><div class="line"><span class="comment"> 9  * <span class="doctag">@create</span> 2017-10-06 下午1:36</span></div><div class="line"><span class="comment">10  **/</span></div><div class="line"><span class="number">11</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyNoWay</span> <span class="keyword">implements</span> <span class="title">FlyBehavior</span> </span>&#123;</div><div class="line"><span class="number">12</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="number">13</span>         System.out.println(<span class="string">"I can't fly!!!"</span>);</div><div class="line"><span class="number">14</span>     &#125;</div><div class="line"><span class="number">15</span> &#125;</div></pre></td></tr></table></figure>
+<p>拥有火箭动力的鸭子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"> <span class="number">1</span> <span class="keyword">package</span> xin.yangmj.strategy.behavior.fly.impl;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> <span class="keyword">import</span> xin.yangmj.strategy.behavior.fly.FlyBehavior;</div><div class="line"> <span class="number">4</span> </div><div class="line"> <span class="number">5</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 6  * 拥有火箭动力的飞行行为</span></div><div class="line"><span class="comment"> 7  *</span></div><div class="line"><span class="comment"> 8  * <span class="doctag">@author</span> Eric Yang</span></div><div class="line"><span class="comment"> 9  * <span class="doctag">@create</span> 2017-10-06 下午2:16</span></div><div class="line"><span class="comment">10  **/</span></div><div class="line"><span class="number">11</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyRocketPowered</span> <span class="keyword">implements</span> <span class="title">FlyBehavior</span> </span>&#123;</div><div class="line"><span class="number">12</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fly</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="number">13</span>         System.out.println(<span class="string">"I'm flying with a rocket!"</span>);</div><div class="line"><span class="number">14</span>     &#125;</div><div class="line"><span class="number">15</span> &#125;</div></pre></td></tr></table></figure>
+<p>以上三个为具体的飞行行为实现类</p>
+<p>针对鸭子叫的行为的不同，故也可以分为多种实现，如下；</p>
+<p>首先封装呱呱叫行为，也即，抽象为超类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> <span class="number">1</span> <span class="keyword">package</span> xin.yangmj.strategy.behavior.quack;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 4  * 这是叫的行为接口</span></div><div class="line"><span class="comment"> 5  *</span></div><div class="line"><span class="comment"> 6  * <span class="doctag">@author</span> Eric Yang</span></div><div class="line"><span class="comment"> 7  * <span class="doctag">@create</span> 2017-10-06 下午1:40</span></div><div class="line"><span class="comment"> 8  **/</span></div><div class="line"> <span class="number">9</span> <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">QuackBehavior</span> </span>&#123;</div><div class="line"><span class="number">10</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quack</span><span class="params">()</span></span>;</div><div class="line"><span class="number">11</span> &#125;</div></pre></td></tr></table></figure>
+<p>其次根据呱呱叫个区别有如下三个实现类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"> <span class="number">1</span> <span class="keyword">package</span> xin.yangmj.strategy.behavior.quack.impl;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> <span class="keyword">import</span> xin.yangmj.strategy.behavior.quack.QuackBehavior;</div><div class="line"> <span class="number">4</span> </div><div class="line"> <span class="number">5</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 6  * 什么都不做</span></div><div class="line"><span class="comment"> 7  *</span></div><div class="line"><span class="comment"> 8  * <span class="doctag">@author</span> Eric Yang</span></div><div class="line"><span class="comment"> 9  * <span class="doctag">@create</span> 2017-10-06 下午1:43</span></div><div class="line"><span class="comment">10  **/</span></div><div class="line"><span class="number">11</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MuteQuack</span> <span class="keyword">implements</span> <span class="title">QuackBehavior</span> </span>&#123;</div><div class="line"><span class="number">12</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quack</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="number">13</span>         System.out.println(<span class="string">"&lt;&lt; Silence &gt;&gt;"</span>);</div><div class="line"><span class="number">14</span>     &#125;</div><div class="line"><span class="number">15</span> &#125;</div><div class="line"> <span class="number">1</span> <span class="keyword">package</span> xin.yangmj.strategy.behavior.quack.impl;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> <span class="keyword">import</span> xin.yangmj.strategy.behavior.quack.QuackBehavior;</div><div class="line"> <span class="number">4</span> </div><div class="line"> <span class="number">5</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 6  * 鸭子呱呱叫类</span></div><div class="line"><span class="comment"> 7  *</span></div><div class="line"><span class="comment"> 8  * <span class="doctag">@author</span> Eric Yang</span></div><div class="line"><span class="comment"> 9  * <span class="doctag">@create</span> 2017-10-06 下午1:41</span></div><div class="line"><span class="comment">10  **/</span></div><div class="line"><span class="number">11</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Quack</span> <span class="keyword">implements</span> <span class="title">QuackBehavior</span> </span>&#123;</div><div class="line"><span class="number">12</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quack</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="number">13</span>         System.out.println(<span class="string">"Quack"</span>);</div><div class="line"><span class="number">14</span>     &#125;</div><div class="line"><span class="number">15</span> &#125;</div><div class="line"> <span class="number">1</span> <span class="keyword">package</span> xin.yangmj.strategy.behavior.quack.impl;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> <span class="keyword">import</span> xin.yangmj.strategy.behavior.quack.QuackBehavior;</div><div class="line"> <span class="number">4</span> </div><div class="line"> <span class="number">5</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 6  * 橡皮鸭吱吱叫类</span></div><div class="line"><span class="comment"> 7  *</span></div><div class="line"><span class="comment"> 8  * <span class="doctag">@author</span> Eric Yang</span></div><div class="line"><span class="comment"> 9  * <span class="doctag">@create</span> 2017-10-06 下午1:45</span></div><div class="line"><span class="comment">10  **/</span></div><div class="line"><span class="number">11</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Squeak</span> <span class="keyword">implements</span> <span class="title">QuackBehavior</span> </span>&#123;</div><div class="line"><span class="number">12</span>     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quack</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="number">13</span>         System.out.println(<span class="string">"Squeak"</span>);</div><div class="line"><span class="number">14</span>     &#125;</div><div class="line"><span class="number">15</span> &#125;</div></pre></td></tr></table></figure>
+<p>现在给出鸭子超类：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"> <span class="number">1</span> package xin.yangmj.strategy.duck;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> import xin.yangmj.strategy.behavior.fly.FlyBehavior;</div><div class="line"> <span class="number">4</span> import xin.yangmj.strategy.behavior.quack.QuackBehavior;</div><div class="line"> <span class="number">5</span> </div><div class="line"> <span class="number">6</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 7  * 这是鸭子抽象类</span></div><div class="line"><span class="comment"> 8  *</span></div><div class="line"><span class="comment"> 9  * @author Eric Yang</span></div><div class="line"><span class="comment">10  * @create 2017-10-06 下午1:29</span></div><div class="line"><span class="comment">11  **/</span></div><div class="line"><span class="number">12</span> public abstract class Duck &#123;</div><div class="line"><span class="number">13</span> </div><div class="line"><span class="number">14</span>     <span class="comment">// 加上这两个public目的：Duck和其实现类不在同一包下，且Duck在外层包下</span></div><div class="line"><span class="number">15</span>     public FlyBehavior flyBehavior;</div><div class="line"><span class="number">16</span>     public QuackBehavior quackBehavior;</div><div class="line"><span class="number">17</span> </div><div class="line"><span class="number">18</span>     public Duck()&#123;&#125;</div><div class="line"><span class="number">19</span> </div><div class="line"><span class="number">20</span>     <span class="comment">// 委托给行为类</span></div><div class="line"><span class="number">21</span>     public void performFly() &#123;</div><div class="line"><span class="number">22</span>         flyBehavior.fly();</div><div class="line"><span class="number">23</span>     &#125;</div><div class="line"><span class="number">24</span>     public void performQuack() &#123;</div><div class="line"><span class="number">25</span>         quackBehavior.quack();</div><div class="line"><span class="number">26</span>     &#125;</div><div class="line"><span class="number">27</span> </div><div class="line"><span class="number">28</span>     <span class="comment">// 所有鸭子共有的行为</span></div><div class="line"><span class="number">29</span>     public void swim() &#123;</div><div class="line"><span class="number">30</span>         System.out.println(<span class="string">"All ducks float, even decoys!"</span>);</div><div class="line"><span class="number">31</span>     &#125;</div><div class="line"><span class="number">32</span> </div><div class="line"><span class="number">33</span>     public abstract void display();</div><div class="line"><span class="number">34</span> </div><div class="line"><span class="number">35</span>     <span class="comment">// 动态设定行为</span></div><div class="line"><span class="number">36</span>     public void setFlyBehavior(FlyBehavior fb) &#123;</div><div class="line"><span class="number">37</span>         flyBehavior = fb;</div><div class="line"><span class="number">38</span>     &#125;</div><div class="line"><span class="number">39</span>     public void setQuackBehavior(QuackBehavior qb) &#123;</div><div class="line"><span class="number">40</span>         quackBehavior = qb;</div><div class="line"><span class="number">41</span>     &#125;</div><div class="line"><span class="number">42</span> </div><div class="line"><span class="number">43</span> &#125;</div></pre></td></tr></table></figure>
+<p>再给出两个鸭子的具体实现类：</p>
+<p>这是绿头鸭子</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"> <span class="number">1</span> <span class="keyword">package</span> xin.yangmj.strategy.duck.impl;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> <span class="keyword">import</span> xin.yangmj.strategy.behavior.fly.impl.<span class="type">FlyWithWings</span>;</div><div class="line"> <span class="number">4</span> <span class="keyword">import</span> xin.yangmj.strategy.behavior.quack.impl.<span class="type">Quack</span>;</div><div class="line"> <span class="number">5</span> <span class="keyword">import</span> xin.yangmj.strategy.duck.<span class="type">Duck</span>;</div><div class="line"> <span class="number">6</span> </div><div class="line"> <span class="number">7</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 8  * 这是绿头鸭子</span></div><div class="line"><span class="comment"> 9  *</span></div><div class="line"><span class="comment">10  * @author Eric Yang</span></div><div class="line"><span class="comment">11  * @create 2017-10-06 下午2:05</span></div><div class="line"><span class="comment">12  **/</span></div><div class="line"><span class="number">13</span> public <span class="class"><span class="keyword">class</span> <span class="title">MallardDuck</span> <span class="keyword">extends</span> <span class="title">Duck</span> </span>&#123;</div><div class="line"><span class="number">14</span> </div><div class="line"><span class="number">15</span>     public <span class="type">MallardDuck</span>() &#123;</div><div class="line"><span class="number">16</span>         flyBehavior = <span class="keyword">new</span> <span class="type">FlyWithWings</span>();</div><div class="line"><span class="number">17</span>         quackBehavior = <span class="keyword">new</span> <span class="type">Quack</span>();</div><div class="line"><span class="number">18</span>     &#125;</div><div class="line"><span class="number">19</span> </div><div class="line"><span class="number">20</span>     public void display() &#123;</div><div class="line"><span class="number">21</span>         <span class="type">System</span>.out.println(<span class="string">"I'm a real Mallard duck!"</span>);</div><div class="line"><span class="number">22</span>     &#125;</div><div class="line"><span class="number">23</span> &#125;</div></pre></td></tr></table></figure>
+<p>这是模型鸭子</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"> <span class="number">1</span> <span class="keyword">package</span> xin.yangmj.strategy.duck.impl;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> <span class="keyword">import</span> xin.yangmj.strategy.behavior.fly.impl.<span class="type">FlyNoWay</span>;</div><div class="line"> <span class="number">4</span> <span class="keyword">import</span> xin.yangmj.strategy.behavior.quack.impl.<span class="type">Quack</span>;</div><div class="line"> <span class="number">5</span> <span class="keyword">import</span> xin.yangmj.strategy.duck.<span class="type">Duck</span>;</div><div class="line"> <span class="number">6</span> </div><div class="line"> <span class="number">7</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 8  * 模型鸭子</span></div><div class="line"><span class="comment"> 9  *</span></div><div class="line"><span class="comment">10  * @author Eric Yang</span></div><div class="line"><span class="comment">11  * @create 2017-10-06 下午2:11</span></div><div class="line"><span class="comment">12  **/</span></div><div class="line"><span class="number">13</span> public <span class="class"><span class="keyword">class</span> <span class="title">ModelDuck</span> <span class="keyword">extends</span> <span class="title">Duck</span> </span>&#123;</div><div class="line"><span class="number">14</span> </div><div class="line"><span class="number">15</span>     public <span class="type">ModelDuck</span>() &#123;</div><div class="line"><span class="number">16</span>         flyBehavior = <span class="keyword">new</span> <span class="type">FlyNoWay</span>();</div><div class="line"><span class="number">17</span>         quackBehavior = <span class="keyword">new</span> <span class="type">Quack</span>();</div><div class="line"><span class="number">18</span>     &#125;</div><div class="line"><span class="number">19</span> </div><div class="line"><span class="number">20</span>     public void display() &#123;</div><div class="line"><span class="number">21</span>         <span class="type">System</span>.out.println(<span class="string">"I'm a model duck!"</span>);</div><div class="line"><span class="number">22</span>     &#125;</div><div class="line"><span class="number">23</span> &#125;</div></pre></td></tr></table></figure>
+<p>最后给出测试代码：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"> <span class="number">1</span> package xin.yangmj.strategy;</div><div class="line"> <span class="number">2</span> </div><div class="line"> <span class="number">3</span> import xin.yangmj.strategy.behavior.fly.impl.FlyRocketPowered;</div><div class="line"> <span class="number">4</span> import xin.yangmj.strategy.duck.Duck;</div><div class="line"> <span class="number">5</span> import xin.yangmj.strategy.duck.impl.MallardDuck;</div><div class="line"> <span class="number">6</span> import xin.yangmj.strategy.duck.impl.ModelDuck;</div><div class="line"> <span class="number">7</span> </div><div class="line"> <span class="number">8</span> <span class="comment">/**</span></div><div class="line"><span class="comment"> 9  * 这是整个策略模式的测试类</span></div><div class="line"><span class="comment">10  *</span></div><div class="line"><span class="comment">11  * @author Eric Yang</span></div><div class="line"><span class="comment">12  * @create 2017-10-06 下午2:33</span></div><div class="line"><span class="comment">13  **/</span></div><div class="line"><span class="number">14</span> public class MiniDuckSimulator &#123;</div><div class="line"><span class="number">15</span>     public static void main(String[] args) &#123;</div><div class="line"><span class="number">16</span>         Duck mallard = new MallardDuck();</div><div class="line"><span class="number">17</span>         mallard.performFly();</div><div class="line"><span class="number">18</span>         mallard.performQuack();</div><div class="line"><span class="number">19</span> </div><div class="line"><span class="number">20</span>         <span class="comment">// 动态设定行为</span></div><div class="line"><span class="number">21</span>         Duck model = new ModelDuck();</div><div class="line"><span class="number">22</span>         model.performFly();</div><div class="line"><span class="number">23</span>         <span class="comment">// 更改运行行为</span></div><div class="line"><span class="number">24</span>         model.setFlyBehavior(new FlyRocketPowered());</div><div class="line"><span class="number">25</span>         model.performFly();</div><div class="line"><span class="number">26</span> </div><div class="line"><span class="number">27</span>         <span class="comment">// 哈哈哈，这是测试Git</span></div><div class="line"><span class="number">28</span>     &#125;</div><div class="line"><span class="number">29</span> &#125;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p> <img src="http://images2017.cnblogs.com/blog/1098077/201710/1098077-20171006155602443-1141011125.png" alt="img"></p>
+<p> <strong>策略模式定义</strong>：定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。</p>
+<p>　　 通过上面的简单介绍可以总结出策略模式运用到的几个设计原则：</p>
+<p>　　 1.找出应用中可能需要变化之处，把它们独立出来，不要和哪些不需要变化的代码混在一起。—<strong>封装变化</strong>，以便以后可以轻易地改动或扩充此部分，而不影响不需要变化的其他部分。在本例中，我们并没有将鸭子的两个行为fly()和quack()放到Duck类里面，这些行为会随着鸭子的不同而改变，让所有的子类都有这些行为是不恰当的，比如，某些鸭子可能不会飞等。所以，我们必须要将这两个行为从Duck类中分离出来，通过建立一组新类来代表每个行为，可以理解为定义中的算法族。这样的设计，可以让飞行和呱呱叫的动作行为被其他的对象复用，因为这些行为已经与鸭子类无关了，而我们也可以新增一些行为，不会影响到既有的行为类，也不会影响“使用”到飞行行为得鸭子类。这么一来，有了继承的“复用”好处，却没有继承所带来的包袱。</p>
+<p>　　 2.<strong>针对接口编程，而不是针对实现编程。</strong>我们可以利用接口代表每个行为，比如说，FlyBehavior与QuackBehavior，而行为得每个实现都将实现其中的一个接口，这样一来，鸭子的子类将使用这两个行为接口所表示的行为，所以实际的“实现”不会被绑死在鸭子的子类中，也即，鸭子类就不再需要知道行为的实现细节。</p>
+<p>　　 3.<strong>多用组合，少用继承。</strong>“有一个”可能比“是一个”更好，本例中，每个鸭子都有飞和叫的行为，将这两个类结合起来使用，就是我们所说的组合。组合和“继承”的区别在于，鸭子的行为不是继承来的，而是和适当的行为对象“组合”来的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechat.png" alt="Eric Yang WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.png" alt="Eric Yang Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Eric Yang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://yangmj.xin/2018/03/27/design-patterns-strategy/" title="《Head First 设计模式》之策略模式">https://yangmj.xin/2018/03/27/design-patterns-strategy/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/27/design-patterns-observer/" rel="prev" title="《Head First 设计模式》之观察者模式">
+                《Head First 设计模式》之观察者模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59f0482db166bc1a" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjAwMS8xMjUzNw=="></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/home.jpg"
+               alt="Eric Yang" />
+          <p class="site-author-name" itemprop="name">Eric Yang</p>
+           
+              <p class="site-description motion-element" itemprop="description">You got a dream, you gotta protect it</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/EricYangLove" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/jerry.yang.9275439" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                    
+                      Facebook
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/eric-yang-94/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                    
+                      知乎
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/3849755248/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://gitee.com/BinGo2014" title="BinGo" target="_blank">BinGo</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/zuoxiaolong/" title="左潇龙" target="_blank">左潇龙</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#策略模式"><span class="nav-number">2.</span> <span class="nav-text">策略模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2018 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eric Yang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="true"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("aoLjb4wVQlRy9vrfD4tzttfp-gzGzoHsz", "4KmejdxayrrU9zcq9qfLidPI");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
